@@ -1,5 +1,9 @@
 package com.matheuslt.parkingcontrol.services;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,23 +16,30 @@ import jakarta.transaction.Transactional;
 public class ParkingSpotService {
 
 	@Autowired
-	ParkingSpotRepository parkingSpotRepository;
+	ParkingSpotRepository repository;
+	
+	public List<ParkingSpotModel> findAll() {
+		return repository.findAll();
+	}
+	
+	public Optional<ParkingSpotModel> findById(UUID id) {
+		return repository.findById(id);
+	}
 
 	@Transactional
 	public ParkingSpotModel save(ParkingSpotModel parkingSpotModel) {
-		return parkingSpotRepository.save(parkingSpotModel);
+		return repository.save(parkingSpotModel);
 	}
 
 	public boolean existsByLicensePlateCar(String licensePlateCar) {
-		return parkingSpotRepository.existsByLicensePlateCar(licensePlateCar);
+		return repository.existsByLicensePlateCar(licensePlateCar);
 	}
 
 	public boolean existsByParkingSpotLabel(String parkingSpotLabel) {
-		return parkingSpotRepository.existsByParkingSpotLabel(parkingSpotLabel);
+		return repository.existsByParkingSpotLabel(parkingSpotLabel);
 	}
 
 	public boolean existsByApartmentAndBlock(String apartment, String block) {
-		return parkingSpotRepository.existsByApartmentAndBlock(apartment, block);
+		return repository.existsByApartmentAndBlock(apartment, block);
 	}
-	
 }
