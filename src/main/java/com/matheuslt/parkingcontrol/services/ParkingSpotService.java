@@ -30,6 +30,11 @@ public class ParkingSpotService {
 	public ParkingSpotModel save(ParkingSpotModel parkingSpotModel) {
 		return repository.save(parkingSpotModel);
 	}
+	
+	@Transactional
+	public void delete(ParkingSpotModel parkingSpotModel) {
+		repository.delete(parkingSpotModel);
+	}
 
 	public boolean existsByLicensePlateCar(String licensePlateCar) {
 		return repository.existsByLicensePlateCar(licensePlateCar);
